@@ -11,6 +11,12 @@ variable "cluster_location" {
   type        = string
 }
 
+variable "network" {
+  description = "VPC Network in GCP for your project."
+  type        = string
+  default     = "vu-james-celli-vpc"
+}
+
 variable "cluster_name" {
   description = "Name of the Kubernetes cluster"
   type        = string

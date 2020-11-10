@@ -14,7 +14,7 @@ resource "google_container_cluster" "jx_cluster" {
   initial_node_count      = var.min_node_count
   logging_service         = var.logging_service
   monitoring_service      = var.monitoring_service
-  network                 = var.network
+  network                 = "${var.project-id}-vpc"
 
   // should disable master auth
   master_auth {
