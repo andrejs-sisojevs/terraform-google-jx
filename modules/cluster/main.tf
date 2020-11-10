@@ -14,6 +14,7 @@ resource "google_container_cluster" "jx_cluster" {
   initial_node_count      = var.min_node_count
   logging_service         = var.logging_service
   monitoring_service      = var.monitoring_service
+  network                 = var.network
 
   // should disable master auth
   master_auth {
@@ -87,7 +88,7 @@ module "jx-health" {
 
 // ----------------------------------------------------------------------------
 // Add main Jenkins X Kubernetes namespace
-// 
+//
 // https://www.terraform.io/docs/providers/kubernetes/r/namespace.html
 // ----------------------------------------------------------------------------
 resource "kubernetes_namespace" "jenkins_x_namespace" {
