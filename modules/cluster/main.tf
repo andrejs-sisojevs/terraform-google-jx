@@ -15,6 +15,7 @@ resource "google_container_cluster" "jx_cluster" {
   logging_service         = var.logging_service
   monitoring_service      = var.monitoring_service
   network                 = var.network
+  subnetwork              = var.subnetwork
 
   // should disable master auth
   master_auth {
