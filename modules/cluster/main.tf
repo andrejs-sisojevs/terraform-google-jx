@@ -60,6 +60,10 @@ resource "google_container_cluster" "jx_cluster" {
     machine_type = var.node_machine_type
     disk_size_gb = var.node_disk_size
     disk_type    = var.node_disk_type
+    shielded_instance_config {
+      enable_secure_boot          = true
+      enable_integrity_monitoring = true
+    }
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
