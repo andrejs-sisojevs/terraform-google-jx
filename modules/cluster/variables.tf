@@ -17,6 +17,13 @@ variable "network" {
   default     = "vu-james-celli-vpc"
 }
 
+
+variable "subnetwork" {
+  description = "VPC Subnetwork in the VPC of the GCP for your project."
+  type        = string
+  default     = "vu-james-celli-vpc-us-central1"
+}
+
 variable "cluster_name" {
   description = "Name of the Kubernetes cluster"
   type        = string
