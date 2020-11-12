@@ -191,6 +191,7 @@ module "vault" {
   cluster_name        = local.cluster_name
   cluster_id          = random_id.random.hex
   bucket_location     = var.bucket_location
+  uniform_bucket_level_access = var.uniform_bucket_level_access
   jenkins_x_namespace = module.cluster.jenkins_x_namespace
   force_destroy       = var.force_destroy
   external_vault      = local.external_vault
@@ -221,6 +222,7 @@ module "backup" {
   cluster_name        = local.cluster_name
   cluster_id          = random_id.random.hex
   bucket_location     = var.bucket_location
+  uniform_bucket_level_access = var.uniform_bucket_level_access
   jenkins_x_namespace = module.cluster.jenkins_x_namespace
   force_destroy       = var.force_destroy
   jx2                 = var.jx2

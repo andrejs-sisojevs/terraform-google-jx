@@ -53,6 +53,8 @@ resource "google_storage_bucket" "vault_bucket" {
   provider      = google
   name          = "vault-${var.cluster_name}-${var.cluster_id}"
   location      = var.bucket_location
+  uniform_bucket_level_access = var.uniform_bucket_level_access
+  
   force_destroy = var.force_destroy
 }
 

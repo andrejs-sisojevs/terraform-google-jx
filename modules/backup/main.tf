@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// Create bucket for storing Velero backups 
+// Create bucket for storing Velero backups
 //
 // https://github.com/vmware-tanzu/velero
 // https://www.terraform.io/docs/providers/google/r/storage_bucket.html
@@ -10,6 +10,7 @@ resource "google_storage_bucket" "backup_bucket" {
   provider = google
   name     = "backup-${var.cluster_name}-${var.cluster_id}"
   location = var.bucket_location
+  uniform_bucket_level_access = var.uniform_bucket_level_access
 
   force_destroy = var.force_destroy
 }
