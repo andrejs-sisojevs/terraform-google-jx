@@ -157,6 +157,7 @@ module "cluster" {
   cluster_location    = local.location
   cluster_id          = random_id.random.hex
   bucket_location     = var.bucket_location
+  uniform_bucket_level_access = var.uniform_bucket_level_access
   jenkins_x_namespace = var.jenkins_x_namespace
   force_destroy       = var.force_destroy
 

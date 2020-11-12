@@ -43,6 +43,12 @@ variable "bucket_location" {
   default     = "US"
 }
 
+variable "uniform_bucket_level_access" {
+  description = "Flag to enable or disable uniform bucket access"
+  type        = bool
+  default     = true
+}
+
 variable "jenkins_x_namespace" {
   description = "Kubernetes namespace to install Jenkins X in"
   type        = string
