@@ -151,6 +151,8 @@ module "cluster" {
   source = "./modules/cluster"
 
   gcp_project         = var.gcp_project
+  network             = var.network
+  subnetwork          = var.subnetwork
   cluster_name        = local.cluster_name
   cluster_location    = local.location
   cluster_id          = random_id.random.hex

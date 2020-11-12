@@ -27,6 +27,16 @@ variable "cluster_location" {
   default     = "us-central1-a"
 }
 
+variable "network" {
+  description = "VPC Network in GCP for your project."
+  type        = string
+}
+
+variable "subnetwork" {
+  description = "VPC Subnetwork in the VPC of the GCP for your project."
+  type        = string
+}
+
 variable "bucket_location" {
   description = "Bucket location for storage"
   type        = string
