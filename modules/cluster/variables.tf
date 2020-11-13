@@ -36,6 +36,13 @@ variable "cluster_id" {
   type        = string
 }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.16.13-gke.401"
+}
+
+
 // ----------------------------------------------------------------------------
 // Optional Variables
 // ----------------------------------------------------------------------------

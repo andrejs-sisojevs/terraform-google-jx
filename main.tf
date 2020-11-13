@@ -158,6 +158,7 @@ module "cluster" {
   cluster_name        = local.cluster_name
   cluster_location    = local.location
   cluster_id          = random_id.random.hex
+  kubernetes_version  = var.kubernetes_version
   bucket_location     = var.bucket_location
   uniform_bucket_level_access = var.uniform_bucket_level_access
   jenkins_x_namespace = var.jenkins_x_namespace

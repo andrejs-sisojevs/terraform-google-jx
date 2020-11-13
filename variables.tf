@@ -27,6 +27,12 @@ variable "cluster_location" {
   default     = "us-central1-a"
 }
 
+variable "kubernetes_version" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.16.13-gke.401"
+}
+
 variable "network" {
   description = "VPC Network in GCP for your project."
   type        = string
