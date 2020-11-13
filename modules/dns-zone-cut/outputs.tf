@@ -10,12 +10,12 @@ output "externaldns_dns_name" {
 
 output "externaldns_sub_ns" {
   description = "Subzone nameservers"
-  value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.*.name_servers
+  value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.name_servers
 }
 
 output "externaldnsdns_sub_name" {
   description = "Subzone DNS name"
-  value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.*.dns_name
+  value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.dns_name
 }
 
 output "subdomain_verification_cmd" {

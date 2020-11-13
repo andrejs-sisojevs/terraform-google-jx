@@ -62,3 +62,17 @@ output "externaldns_dns_name" {
   description = "ExternalDNS name"
   value       = module.dns.externaldns_dns_name
 }
+
+output "externaldns_sub_ns" {
+  description = "Subzone nameservers"
+  value       = module.dns.externaldns_sub_ns
+}
+
+output "externaldnsdns_sub_name" {
+  description = "Subzone DNS name"
+  value       = module.dns.externaldnsdns_sub_name
+}
+
+output "subdomain_verification_cmd" {
+    value = module.dns.subdomain_verification_cmd
+}
