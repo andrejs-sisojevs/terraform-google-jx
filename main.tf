@@ -12,11 +12,13 @@ terraform {
 // ----------------------------------------------------------------------------
 provider "google" {
   project = var.gcp_project
+  region = var.cluster_location
   version = ">= 3.46.0"
 }
 
 provider "google-beta" {
   project = var.gcp_project
+  region = var.cluster_location
   version = ">= 3.46.0"
 }
 
@@ -231,15 +233,25 @@ module "backup" {
 // ----------------------------------------------------------------------------
 // Setup ExternalDNS
 // ----------------------------------------------------------------------------
+# module "dns" {
+#   source = "./modules/dns"
+#
+#   gcp_project         = var.gcp_project
+#   cluster_name        = local.cluster_name
+#   parent_domain       = var.parent_domain
+#   jenkins_x_namespace = module.cluster.jenkins_x_namespace
+#   jx2                 = var.jx2
+#   subdomain           = var.subdomain
+# }
+
 module "dns" {
-  source = "./modules/dns"
+  source = "./modules/dns-zone-cut"
 
   gcp_project         = var.gcp_project
-  cluster_name        = local.cluster_name
+  parent_domain_managed_zone_name = var.parent_domain_managed_zone_name
   parent_domain       = var.parent_domain
-  jenkins_x_namespace = module.cluster.jenkins_x_namespace
-  jx2                 = var.jx2
   subdomain           = var.subdomain
+  sub_zone_description = "GKE with JX managed zone"
 }
 
 // ----------------------------------------------------------------------------

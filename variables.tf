@@ -61,6 +61,11 @@ variable "force_destroy" {
   default     = false
 }
 
+variable "parent_domain_managed_zone_name" {
+  description = "Name of GCP managed zone"
+  type        = string
+}
+
 variable "parent_domain" {
   description = "The parent domain to be allocated to the cluster"
   type        = string
