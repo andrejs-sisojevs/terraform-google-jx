@@ -74,7 +74,7 @@ output "externaldnsdns_sub_name" {
 }
 
 output "subdomain_verification_cmd" {
-    value = module.dns.subdomain_verification_cmd
+  value = module.dns.subdomain_verification_cmd
 }
 
 output "kubeconfig" {

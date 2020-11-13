@@ -4,11 +4,8 @@
 // https://www.terraform.io/docs/providers/google/r/container_cluster.html
 // ----------------------------------------------------------------------------
 
-data "google_compute_zones" "available" {
-}
-
 data "google_container_engine_versions" "supported" {
-  location           = data.google_compute_zones.available.names[0]
+  location       = var.cluster_location
   version_prefix = var.kubernetes_version
 }
 
