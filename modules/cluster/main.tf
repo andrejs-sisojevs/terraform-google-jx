@@ -3,6 +3,19 @@
 //
 // https://www.terraform.io/docs/providers/google/r/container_cluster.html
 // ----------------------------------------------------------------------------
+
+data "google_compute_zones" "available" {
+}
+
+data "google_container_engine_versions" "supported" {
+  location           = data.google_compute_zones.available.names[0]
+  version_prefix = var.kubernetes_version
+}
+
+resource "random_id" "password" {
+  byte_length = 16
+}
+
 resource "google_container_cluster" "jx_cluster" {
   provider                = google-beta
   name                    = var.cluster_name
@@ -17,10 +30,13 @@ resource "google_container_cluster" "jx_cluster" {
   network                 = var.network
   subnetwork              = var.subnetwork
 
+  node_version       = data.google_container_engine_versions.supported.latest_node_version
+  min_master_version = data.google_container_engine_versions.supported.latest_master_version
+
   // should disable master auth
   master_auth {
-    username = ""
-    password = ""
+    username = "master"
+    password = random_id.password.hex
   }
 
   maintenance_policy {
@@ -79,6 +95,20 @@ resource "google_container_cluster" "jx_cluster" {
       node_metadata = "GKE_METADATA_SERVER"
     }
 
+  }
+}
+
+data "template_file" "kubeconfig" {
+  template = file("${path.module}/kubeconfig-template.yaml")
+
+  vars = {
+    cluster_name    = google_container_cluster.primary.name
+    user_name       = google_container_cluster.primary.master_auth[0].username
+    user_password   = google_container_cluster.primary.master_auth[0].password
+    endpoint        = google_container_cluster.primary.endpoint
+    cluster_ca      = google_container_cluster.primary.master_auth[0].cluster_ca_certificate
+    client_cert     = google_container_cluster.primary.master_auth[0].client_certificate
+    client_cert_key = google_container_cluster.primary.master_auth[0].client_key
   }
 }
 

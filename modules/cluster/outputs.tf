@@ -41,3 +41,7 @@ output "jenkins_x_namespace" {
 output "tekton_sa_email" {
   value = google_service_account.tekton_sa.email
 }
+
+output "kubeconfig" {
+  value = data.template_file.kubeconfig.rendered
+}
