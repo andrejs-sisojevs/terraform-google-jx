@@ -3,12 +3,24 @@
 //
 // https://www.terraform.io/docs/providers/google/r/google_service_account.html
 // https://www.terraform.io/docs/providers/google/r/google_project_iam.html#google_project_iam_member
+
+# Fix for google provider issue #6377:
+#    https://github.com/hashicorp/terraform-provider-google/issues/6377#issuecomment-629063937
+resource "google_project_service" "service_accounts_api" {
+  provider           = google
+  project            = var.gcp_project
+  # gcloud services list --available | grep storage
+  service            = "storage.googleapis.com"
+  disable_on_destroy = false
+}
+
 // ----------------------------------------------------------------------------
 // Build controller
 resource "google_service_account" "build_controller_sa" {
   provider     = google
   account_id   = "${var.cluster_name}-bc"
   display_name = substr("Build controller service account for cluster ${var.cluster_name}", 0, 100)
+  depends_on = [google_project_service.service_accounts_api]
 }
 
 resource "google_project_iam_member" "build_controller_sa_storage_object_admin_binding" {
@@ -29,6 +41,7 @@ resource "google_service_account" "kaniko_sa" {
   provider     = google
   account_id   = "${var.cluster_name}-ko"
   display_name = substr("Kaniko service account for cluster ${var.cluster_name}", 0, 100)
+  depends_on = [google_project_service.service_accounts_api]
 }
 
 resource "google_project_iam_member" "kaniko_sa_storage_admin_binding" {
@@ -43,6 +56,7 @@ resource "google_service_account" "tekton_sa" {
   provider     = google
   account_id   = "${var.cluster_name}-tekton"
   display_name = substr("Tekton service account for cluster ${var.cluster_name}", 0, 100)
+  depends_on = [google_project_service.service_accounts_api]
 }
 
 resource "google_project_iam_member" "tekton_sa_storage_object_admin_binding" {
@@ -71,6 +85,7 @@ resource "google_service_account" "jxui_sa" {
   provider     = google
   account_id   = "${var.cluster_name}-jxui"
   display_name = substr("Jenkins X UI service account for cluster ${var.cluster_name}", 0, 100)
+  depends_on = [google_project_service.service_accounts_api]
 }
 
 resource "google_project_iam_member" "ui_sa_storage_admin_binding" {
@@ -206,6 +221,7 @@ resource "google_service_account" "boot_sa" {
   provider     = google
   account_id   = "${var.cluster_name}-boot"
   display_name = substr("jx boot service account for cluster ${var.cluster_name}", 0, 100)
+  depends_on = [google_project_service.service_accounts_api]
 }
 
 resource "google_project_iam_member" "boot_sa_storage_object_admin_binding" {
