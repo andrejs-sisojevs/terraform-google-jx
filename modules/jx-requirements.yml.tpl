@@ -21,6 +21,7 @@ ingress:
 %{ else }
   domain: "${parent_domain}"
 %{ endif }
+  externalDNS: "${external_dns}"
   tls:
     email: "${tls_email}"
     enabled: ${domain_enabled}
@@ -57,7 +58,7 @@ velero:
   namespace: ${velero_namespace}
   schedule: "${velero_schedule}"
   serviceAccount: ${velero_sa}
-  ttl: "${velero_ttl}"  
+  ttl: "${velero_ttl}"
 %{ endif }
 versionStream:
   ref: ${version_stream_ref}
