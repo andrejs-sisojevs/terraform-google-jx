@@ -292,7 +292,7 @@ locals {
     parent_domain  = var.parent_domain
     subdomain      = var.subdomain
     tls_email      = var.tls_email
-    external_dns   = var.parent_domain != "" && var.subdomain == ""
+    external_dns   = var.parent_domain != "" && var.subdomain != ""
 
     version_stream_ref = var.version_stream_ref
     version_stream_url = var.version_stream_url

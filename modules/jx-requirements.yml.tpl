@@ -21,7 +21,7 @@ ingress:
 %{ else }
   domain: "${parent_domain}"
 %{ endif }
-  externalDNS: "${external_dns}"
+  externalDNS: ${external_dns}
   tls:
     email: "${tls_email}"
     enabled: ${domain_enabled}

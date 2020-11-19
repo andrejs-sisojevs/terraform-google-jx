@@ -68,8 +68,13 @@ output "externaldns_sub_ns" {
   value       = module.dns.externaldns_sub_ns
 }
 
-output "externaldnsdns_sub_name" {
+output "externaldns_sub_name" {
   description = "Subzone DNS name"
+  value       = module.dns.externaldnsdns_sub_name
+}
+
+output "externaldns_sub_id" {
+  description = "Subzone managed zone name"
   value       = module.dns.externaldnsdns_sub_name
 }
 

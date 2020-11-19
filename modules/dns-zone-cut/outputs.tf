@@ -13,9 +13,14 @@ output "externaldns_sub_ns" {
   value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.name_servers
 }
 
-output "externaldnsdns_sub_name" {
+output "externaldns_sub_name" {
   description = "Subzone DNS name"
   value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.dns_name
+}
+
+output "externaldns_sub_id" {
+  description = "Subzone managed zone name"
+  value       = google_dns_managed_zone.externaldns_managed_zone_with_sub.name
 }
 
 output "subdomain_verification_cmd" {
