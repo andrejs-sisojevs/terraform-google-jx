@@ -26,6 +26,11 @@ resource "google_container_cluster" "jx_cluster" {
   monitoring_service      = var.monitoring_service
   network                 = var.network
   subnetwork              = var.subnetwork
+  networking_mode         = "VPC_NATIVE"
+  ip_allocation_policy {
+      cluster_secondary_range_name  = var.subnet_secondary_range_name_for_pods
+      services_secondary_range_name = var.subnet_secondary_range_name_for_services
+  }
 
   node_version       = data.google_container_engine_versions.supported.latest_node_version
   min_master_version = data.google_container_engine_versions.supported.latest_master_version

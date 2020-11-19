@@ -43,6 +43,16 @@ variable "subnetwork" {
   type        = string
 }
 
+variable "subnet_secondary_range_name_for_pods" {
+  description = "Subnet secondary range name used for pods IPs"
+  type        = string
+}
+
+variable "subnet_secondary_range_name_for_services" {
+  description = "Subnet secondary range name used for services IPs"
+  type        = string
+}
+
 variable "bucket_location" {
   description = "Bucket location for storage"
   type        = string

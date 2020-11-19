@@ -155,6 +155,8 @@ module "cluster" {
   gcp_project         = var.gcp_project
   network             = var.network
   subnetwork          = var.subnetwork
+  subnet_secondary_range_name_for_pods     = var.subnet_secondary_range_name_for_pods
+  subnet_secondary_range_name_for_services = var.subnet_secondary_range_name_for_services
   cluster_name        = local.cluster_name
   cluster_location    = local.location
   cluster_id          = random_id.random.hex
