@@ -70,12 +70,12 @@ output "externaldns_sub_ns" {
 
 output "externaldns_sub_name" {
   description = "Subzone DNS name"
-  value       = module.dns.externaldnsdns_sub_name
+  value       = module.dns.externaldns_sub_name
 }
 
 output "externaldns_sub_id" {
   description = "Subzone managed zone name"
-  value       = module.dns.externaldnsdns_sub_name
+  value       = module.dns.externaldns_sub_id
 }
 
 output "subdomain_verification_cmd" {
