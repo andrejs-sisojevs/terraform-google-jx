@@ -4,6 +4,7 @@
 // https://www.terraform.io/docs/providers/google/r/container_cluster.html
 // ----------------------------------------------------------------------------
 
+# gcloud container get-server-config
 data "google_container_engine_versions" "supported" {
   location       = var.cluster_location
   version_prefix = var.kubernetes_version
@@ -27,9 +28,14 @@ resource "google_container_cluster" "jx_cluster" {
   network                 = var.network
   subnetwork              = var.subnetwork
   networking_mode         = "VPC_NATIVE"
+
   ip_allocation_policy {
-      cluster_secondary_range_name  = var.subnet_secondary_range_name_for_pods
-      services_secondary_range_name = var.subnet_secondary_range_name_for_services
+    cluster_secondary_range_name  = var.subnet_secondary_range_name_for_pods
+    services_secondary_range_name = var.subnet_secondary_range_name_for_services
+  }
+
+  network_policy {
+    enabled = true
   }
 
   node_version       = data.google_container_engine_versions.supported.latest_node_version
@@ -96,7 +102,6 @@ resource "google_container_cluster" "jx_cluster" {
     workload_metadata_config {
       node_metadata = "GKE_METADATA_SERVER"
     }
-
   }
 }
 
