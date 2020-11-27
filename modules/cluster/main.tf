@@ -34,9 +34,9 @@ resource "google_container_cluster" "jx_cluster" {
     services_secondary_range_name = var.subnet_secondary_range_name_for_services
   }
 
-  network_policy {
-    enabled = true
-  }
+  # network_policy {
+  #   enabled = true
+  # }
 
   node_version       = data.google_container_engine_versions.supported.latest_node_version
   min_master_version = data.google_container_engine_versions.supported.latest_master_version
@@ -148,6 +148,21 @@ resource "kubernetes_namespace" "jenkins_x_namespace" {
     google_container_cluster.jx_cluster
   ]
 }
+
+# resource "kubernetes_network_policy" "example" {
+#   metadata {
+#     name = "allow-all-network-policy"
+#   }
+#
+#   spec {
+#     pod_selector {}
+#
+#     egress {} # single empty rule to allow all egress traffic
+#     ingress {} # single empty rule to allow all ingress traffic
+#
+#     policy_types = ["Ingress", "Egress"]
+#   }
+# }
 
 // ----------------------------------------------------------------------------
 // Add the Terraform generated jx-requirements.yml to a configmap so it can be
